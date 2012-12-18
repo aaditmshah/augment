@@ -6,5 +6,6 @@
     "keywords": ["augment", "augments", "augmentation", "extend", "extends", "extension", "prototype", "prototypal", "class", "classical", "object", "inheritance", "uber", "super", "constructor", "oop"],
     "main": "augment.js",
     "scripts": ["augment.js"],
-    "license": "GPLv3"
+    "license": "GPLv3",
+    "twitter": "@zcombinator"
 }
