@@ -1,6 +1,6 @@
 # augment #
 
-The world's smallest and fastest classical JavaScript inheritance pattern (`Function.prototype.augment`) is a [seven line function](http://javascript.github.com/augment) which allows you to write [CoffeeScript style classes](http://coffeescript.org/#classes "CoffeeScript") with a flair of [simplicity](http://ejohn.org/blog/simple-javascript-inheritance/ "John Resig -   Simple JavaScript Inheritance"); and it still [beats the bejesus](http://jsperf.com/oop-benchmark/85 "JavaScript Object Oriented Libraries Benchmark · jsPerf") out of other JavaScript inheritance libraries.
+The world's smallest and fastest classical JavaScript inheritance pattern (`Function.prototype.augment`) is a [seven line function](http://javascript.github.com/augment "augment.js") which allows you to write [CoffeeScript style classes](http://coffeescript.org/#classes "CoffeeScript") with a flair of [simplicity](http://ejohn.org/blog/simple-javascript-inheritance/ "John Resig -   Simple JavaScript Inheritance"); and it still [beats the bejesus](http://jsperf.com/oop-benchmark/86 "JavaScript Object Oriented Libraries Benchmark · jsPerf") out of other JavaScript inheritance libraries.
 
 Inspired by giants like [Jeremy Ashkenas](http://ashkenas.com/ "Jeremy/Ashkenas — Portfolio") and [John Resig](http://ejohn.org/ "John Resig - JavaScript Programmer"), `augment` is an augmentation of ideas. Classes created using `augment` have a CoffeeScript like structure, and a syntax like John Resig's; but they are more readable, intuitive and orders of magnitude faster. Plus they work on every JavaScript platform.
 
@@ -367,6 +367,6 @@ Then in `Class.extend` we have:
 Class.extend = arguments.callee;
 ```
 
-This line is omitted in `Function.prototype.augment` because it already exists in the `prototype` chain on all functions. In essence you can `augment` any function you wish to - not just those created by `augment` itself.
+This line is omitted in `Function.prototype.augment` because `augment` already exists in the `prototype` chain on all functions. In essence you can `augment` any function you wish to - not just those created by `augment` itself.
 
 Finally we simply return `Class` in `Class.extend` and `constructor` in `Function.prototype.augment`. That's all that there is to it. Which one do you prefer?
