@@ -1,6 +1,6 @@
 # augment #
 
-The world's smallest and fastest classical JavaScript inheritance pattern (`Function.prototype.augment`) is a [seven line function](http://javascript.github.com/augment/#section-19 "augment.js") which allows you to write [CoffeeScript style classes](http://coffeescript.org/#classes "CoffeeScript") with a flair of [simplicity](http://ejohn.org/blog/simple-javascript-inheritance/ "John Resig -   Simple JavaScript Inheritance"); and it still [beats the bejesus](http://jsperf.com/oop-benchmark/86 "JavaScript Object Oriented Libraries Benchmark · jsPerf") out of other JavaScript inheritance libraries.
+The world's smallest and fastest classical JavaScript inheritance pattern (`Function.prototype.augment`) is a [seven line function](https://github.com/javascript/augment/blob/master/lib/augment.js#L18 "augment.js") which allows you to write [CoffeeScript style classes](http://coffeescript.org/#classes "CoffeeScript") with a flair of [simplicity](http://ejohn.org/blog/simple-javascript-inheritance/ "John Resig -   Simple JavaScript Inheritance"); and it still [beats the bejesus](http://jsperf.com/oop-benchmark/114 "JavaScript Object Oriented Libraries Benchmark · jsPerf") out of other JavaScript inheritance libraries.
 
 Inspired by giants like [Jeremy Ashkenas](http://ashkenas.com/ "Jeremy/Ashkenas — Portfolio") and [John Resig](http://ejohn.org/ "John Resig - JavaScript Programmer"), `augment` is an augmentation of ideas. Classes created using `augment` have a CoffeeScript like structure, and a syntax like John Resig's; but they are more readable, intuitive and orders of magnitude faster. Plus they work on every JavaScript platform.
 
@@ -27,10 +27,10 @@ component install javascript/augment
 You can easily include it in [fiddles](http://jsfiddle.net/ "Create a new Fiddle - jsFiddle") and [benchmarks](http://jsperf.com/ "jsPerf: JavaScript performance playground") using the following HTML code:
 
 ```html
-<script src="https://raw.github.com/javascript/augment/master/augment.js"></script>
+<script src="https://raw.github.com/javascript/augment/master/lib/augment.js"></script>
 ```
 
-Otherwise you may simply browse the [source code](https://github.com/javascript/augment/blob/master/augment.js "javascript/augment") and stick it into your program.
+Otherwise you may simply browse the [source code](https://github.com/javascript/augment/blob/master/lib/augment.js "javascript/augment") and stick it into your program.
 
 ## Creating your First Class ##
 
@@ -38,16 +38,14 @@ I am a huge follower of keeping things simple and learning by example. So let's 
 
 ```javascript
 var Rectangle = Object.augment(function () {
+    this.constructor = function (width, height) {
+        this.height = height;
+        this.width = width;
+    };
+
     this.area = function () {
         return this.width * this.height;
     };
-
-    return Rectangle;
-
-    function Rectangle(width, height) {
-        this.height = height;
-        this.width = width;
-    }
 });
 ```
 
@@ -68,11 +66,9 @@ Now let's create another class which augments our first class. It's as simple as
 
 ```javascript
 var Square = Rectangle.augment(function (Rectangle) {
-    return Square;
-
-    function Square(side) {
+    this.constructor = function (side) {
         Rectangle.call(this, side, side);
-    }
+    };
 });
 ```
 
@@ -93,20 +89,18 @@ What about accessing base class `prototype` methods from the derived class? Let'
 
 ```javascript
 var Cube = Square.augment(function (Square, uber) {
+    this.constructor = function (side) {
+        Square.call(this, side);
+        this.side = side;
+    };
+
     this.area = function () {
-        return 6 * uber.area();
+        return 6 * uber.area.call(this);
     };
 
     this.volume = function () {
-        return this.side * uber.area();
+        return this.side * uber.area.call(this);
     };
-
-    return Cube;
-
-    function Cube(side) {
-        this.side = side;
-        Square.call(this, side);
-    }
 });
 ```
 
@@ -116,8 +110,8 @@ Creating the final object:
 
 ```javascript
 var cube = new Cube(5);
-alert(cube.volume());
-alert(cube.area());
+console.log(cube.volume());
+console.log(cube.area());
 ```
 
 That's all folks!
@@ -157,6 +151,7 @@ Do you see the similarity?
 
 1. The [immediately-invoked function expression](http://benalman.com/news/2010/11/immediately-invoked-function-expression/ "Ben Alman &raquo; Immediately-Invoked Function Expression (IIFE)") is replaced with a call to `Object.augment` passing the anonymous _class body_ function as an argument.
 2. `Rectangle.prototype` is replaced with the `this` pointer. Hence the verbose `Rectangle.prototype.area` becomes `this.area` which is more descriptive.
+3. The `constructor` is defined on `this` instead of being returned.
 
 Beside that everything else remains the same.
 
@@ -327,10 +322,10 @@ Because `Class.extend` takes an object enumerating the public members of the cla
 In contrast the entire loop is replaced by a single line in `Function.prototype.augment`:
 
 ```javascript
-var constructor = classBodyFunction.call(prototype, this, uber);
+body.call(prototype, this, uber);
 ```
 
-The `classBodyFunction` is the anonymous function which wraps the body of the class (John Resig's `Class.extend` uses an object). It's called with two arguments - the base class `constructor` (which's called `this`) and it's `prototype` (which's called `uber`), and it's `this` pointer is set to the newly created `prototype` which allows us to add public methods to `this` directly. No need for a loop.
+The `body` is the anonymous function which wraps the body of the class (John Resig's `Class.extend` uses an object). It's called with two arguments - the base class `constructor` (which's called `this`) and it's `prototype` (which's called `uber`), and it's `this` pointer is set to the newly created `prototype` which allows us to add public methods to `this` directly. No need for a loop.
 
 `Class.extend` then creates the actual constructor function to return:
 
@@ -344,7 +339,7 @@ function Class() {
 In `Function.prototype.augment` this can be replaced with the following line:
 
 ```javascript
-if (typeof constructor !== "function") constructor = function () {};
+if (!ownPropertyOf(prototype, "constructor")) prototype.constructor = function () {};
 ```
 
 The next two lines in both functions are essentially the same. In `Class.extend` we have:
@@ -357,7 +352,7 @@ Class.prototype.constructor = Class;
 The equivalent in `Function.prototype.augment` is:
 
 ```javascript
-prototype.constructor = constructor;
+var constructor = prototype.constructor;
 constructor.prototype = prototype;
 ```
 
