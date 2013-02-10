@@ -32,27 +32,6 @@ You can easily include it in [fiddles](http://jsfiddle.net/ "Create a new Fiddle
 
 Otherwise you may simply browse the [source code](https://github.com/javascript/augment/blob/master/lib/augment.js "javascript/augment") and stick it into your program.
 
-## Redefining the Module Pattern ##
-
-The [module pattern](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth "Adequately Good - JavaScript Module Pattern: In-Depth - by Ben Cherry") in JavaScript is used to provide privacy and state via an anonymous closure. It may also optionally return an object. You may use `augment` as achieve the same result as follows:
-
-```javascript
-var MODULE = Object.augment(function () {
-    var private = true;
-    this.public = true;
-});
-```
-
-As long as you don't define `constructor` on `this` inside the module, `augment` will return an object with the properties defined on `this` instead of the constructor function. You may also import values as follows:
-
-```javascript
-var MODULE = Object.augment(function ($, YAHOO) {
-    // now have access to globals jQuery (as $) and YAHOO in this code
-}, jQuery, YAHOO);
-```
-
-By default the `prototype` of the function you are augmenting (in this case `Object`) is always imported. It's passed at the end of the argument list.
-
 ## Creating your First Class ##
 
 I am a huge follower of keeping things simple and learning by example. So let's begin:
@@ -109,7 +88,7 @@ What about accessing base class `prototype` methods from the derived class? Let'
 ```javascript
 var Cube = Square.augment(function (base) {
     this.constructor = function (side) {
-        Square.call(this, side);
+        base.constructor.call(this, side);
         this.side = side;
     };
 
@@ -125,6 +104,8 @@ var Cube = Square.augment(function (base) {
 
 As you can see the second argument passed to the anonymous _class body_ function is the `prototype` of the base class `Square`, which we named `base`. It can be used to access the methods on the `prototype` of the base class.
 
+Also notice that instead of invoking the super class constructor as `Square.call` we are using `base.constructor.call` instead. Yes there's an additional property lookup but it's essentially the same.
+
 Creating the final object:
 
 ```javascript
@@ -132,5 +113,26 @@ var cube = new Cube(5);
 console.log(cube.volume());
 console.log(cube.area());
 ```
+
+## Redefining the Module Pattern ##
+
+The [module pattern](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth "Adequately Good - JavaScript Module Pattern: In-Depth - by Ben Cherry") in JavaScript is used to provide privacy and state via an anonymous closure. It may also optionally return an object. You may use `augment` as achieve the same result. As long as you don't define `this.constructor`, `augment` will return a module instead of a class:
+
+```javascript
+var MODULE = Object.augment(function () {
+    var private = true;
+    this.public = true;
+});
+```
+
+You may also import values as follows:
+
+```javascript
+var MODULE = Object.augment(function ($, YAHOO) {
+    // now have access to globals jQuery (as $) and YAHOO in this code
+}, jQuery, YAHOO);
+```
+
+By default the `prototype` of the function you are augmenting (in this case `Object`) is always imported. It's passed at the end of the argument list.
 
 That's all folks!
