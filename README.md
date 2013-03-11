@@ -135,4 +135,69 @@ var MODULE = Object.augment(function ($, YAHOO) {
 
 By default the `prototype` of the function you are augmenting (in this case `Object`) is always imported. It's passed at the end of the argument list.
 
+## Functional Programming Utilities ##
+
+The `augment` framework was designed keeping code reuse in mind. Hence all the utility functions used to write the actual framework are made available to the user as well. These utilities aid in functional programming in JavaScript. They are documented below:
+
+### Function.bindable ###
+
+The `bindable` function allows you to create a bindable version of an existing function which when called returns a new function bound to the given arguments. For example:
+
+```javascript
+Function.prototype.defer = function () {
+    setTimeout.bind(null, this, 0).apply(null, arguments);
+};
+
+var deferrable = Function.bindable(Function.prototype.defer);
+
+var deferredAlert = deferrable(alert);
+
+deferredAlert("This will be displayed later.");
+alert("This will be displayed first.");
+```
+
+As a thumb rule the name of the bindable version of a function should be an adjective with the suffix _"able"_. For example a bindable `bind` would be `bindable` itself (which is what it actually is). A bindable `call` would be `callable`. A bindable `apply` would be `appliable`. You get my drift. Concise and descriptive names are very helpful.
+
+### Function.callable ###
+
+The `callable` function allows you to create a callable version of an existing function which when called calls the existing function with the given arguments and `this` pointer. For example:
+
+```javascript
+var defer = Function.callable(Function.prototype.defer);
+defer(alert, "This will be displayed later.");
+alert("This will be displayed first.");
+```
+
+To make things more clear assume that you pass a function `foo` to `callable` as follows - `Function.callable(foo)`. This is equivalent to `foo.call` (without actually calling `call`). Hence `Function.callable(foo)(that, arg1, ...)` is equivalent to `foo.call(that, arg1, ...)`.
+
+### Function.appliable ###
+
+The `appliable` function allows you to create an appliable version of an existing function which when called applies the given arguments and `this` pointer to the existing function. For example:
+
+```javascript
+var tail = Function.appliable(function () {
+    return Array.from(arguments, 1);
+}, null);
+```
+
+To make things more clear assume that you pass a function `foo` to `appliable` as follows - `Function.appliable(foo)`. This is equivalent to `foo.apply` (without actually calling `apply`). Hence `Function.appliable(foo)(that, [arg1, ...])` is equivalent to `foo.apply(that, [arg1, ...])`.
+
+### Array.from ###
+
+The `Array.from` function allows you to slice an array from a start index to an end index. You can use it to create a one-level deep copy of an array or to convert an array-like object into an array. For example:
+
+```javascript
+var primes = [2, 3, 5, 7];
+var oddPrimes = tail(primes); // [3, 5, 7]
+```
+
+### Object.ownPropertyOf ###
+
+The `ownPropertyOf` function is used to check if an object has own property. It's particularly useful if the object you're testing doesn't have the `Object` constructor in its prototype chain. For example:
+
+```javascript
+var object = Object.create(null);
+Object.ownPropertyOf(object, "property"); // false
+```
+
 That's all folks!
