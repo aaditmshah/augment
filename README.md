@@ -170,18 +170,6 @@ alert("This will be displayed first.");
 
 To make things more clear assume that you pass a function `foo` to `callable` as follows - `Function.callable(foo)`. This is equivalent to `foo.call` (without actually calling `call`). Hence `Function.callable(foo)(that, arg1, ...)` is equivalent to `foo.call(that, arg1, ...)`.
 
-### Function.appliable ###
-
-The `appliable` function allows you to create an appliable version of an existing function which when called applies the given arguments and `this` pointer to the existing function. For example:
-
-```javascript
-var tail = Function.appliable(function () {
-    return Array.from(arguments, 1);
-}, null);
-```
-
-To make things more clear assume that you pass a function `foo` to `appliable` as follows - `Function.appliable(foo)`. This is equivalent to `foo.apply` (without actually calling `apply`). Hence `Function.appliable(foo)(that, [arg1, ...])` is equivalent to `foo.apply(that, [arg1, ...])`.
-
 ### Array.from ###
 
 The `Array.from` function allows you to slice an array from a start index to an end index. You can use it to create a one-level deep copy of an array or to convert an array-like object into an array. For example:
@@ -189,15 +177,6 @@ The `Array.from` function allows you to slice an array from a start index to an 
 ```javascript
 var primes = [2, 3, 5, 7];
 var oddPrimes = tail(primes); // [3, 5, 7]
-```
-
-### Object.ownPropertyOf ###
-
-The `ownPropertyOf` function is used to check if an object has own property. It's particularly useful if the object you're testing doesn't have the `Object` constructor in its prototype chain. For example:
-
-```javascript
-var object = Object.create(null);
-Object.ownPropertyOf(object, "property"); // false
 ```
 
 That's all folks!
