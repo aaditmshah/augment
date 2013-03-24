@@ -179,4 +179,13 @@ var primes = [2, 3, 5, 7];
 var oddPrimes = tail(primes); // [3, 5, 7]
 ```
 
+### Object.ownPropertyOf ###
+
+The `ownPropertyOf` function is used to check if an object has own property. It's particularly useful if the object you're testing doesn't have the `Object` constructor in its prototype chain. For example:
+
+```javascript
+var object = Object.create(null);
+Object.ownPropertyOf(object, "property"); // false
+```
+
 That's all folks!
