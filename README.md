@@ -1,6 +1,6 @@
 # augment #
 
-The world's smallest and fastest classical JavaScript inheritance pattern (`Function.prototype.augment`) is an [eight line function](https://github.com/javascript/augment/blob/master/lib/augment.js#L18 "augment.js") which allows you to write [CoffeeScript style classes](http://coffeescript.org/#classes "CoffeeScript") with a flair of [simplicity](http://ejohn.org/blog/simple-javascript-inheritance/ "John Resig -   Simple JavaScript Inheritance"); and it still [beats the bejesus](http://jsperf.com/oop-benchmark/118 "JavaScript Object Oriented Libraries Benchmark · jsPerf") out of other JavaScript inheritance libraries.
+The world's smallest and fastest classical JavaScript inheritance pattern (`augment`) is a [seven line function](https://github.com/javascript/augment/blob/master/lib/augment.js#L13 "augment.js") which allows you to write [CoffeeScript style classes](http://coffeescript.org/#classes "CoffeeScript") with a flair of [simplicity](http://ejohn.org/blog/simple-javascript-inheritance/ "John Resig -   Simple JavaScript Inheritance"); and it still [beats the bejesus](http://jsperf.com/oop-benchmark/118 "JavaScript Object Oriented Libraries Benchmark · jsPerf") out of other JavaScript inheritance libraries.
 
 Inspired by giants like [Jeremy Ashkenas](http://ashkenas.com/ "Jeremy/Ashkenas — Portfolio") and [John Resig](http://ejohn.org/ "John Resig - JavaScript Programmer"), `augment` is an augmentation of ideas. Classes created using `augment` have a CoffeeScript like structure, and a syntax like John Resig's; but they are more readable, intuitive and orders of magnitude faster. Plus they work on every JavaScript platform.
 
@@ -12,10 +12,10 @@ You can install `augment` on [node.js](http://nodejs.org/ "node.js") using the f
 npm install augment
 ```
 
-You can also install `augment` on [RingoJS](http://ringojs.org/ "Home - RingoJS") using the following `ringo-admin` command:
+You can also install `augment` on [RingoJS](http://ringojs.org/ "Home - RingoJS") using the following [rp](https://github.com/grob/rp "grob/rp") command:
 
 ```bash
-ringo-admin install javascript/augment
+rp install augment
 ```
 
 Similarly you can install `augment` for web apps using the following [component](https://github.com/component/component) command:
@@ -37,6 +37,42 @@ Otherwise you may simply browse the [source code](https://github.com/javascript/
 I am a huge follower of keeping things simple and learning by example. So let's begin:
 
 ```javascript
+var augment = require("augment");
+
+var Rectangle = augment(Object, function () {
+    this.constructor = function (width, height) {
+        this.height = height;
+        this.width = width;
+    };
+
+    this.area = function () {
+        return this.width * this.height;
+    };
+});
+```
+
+The `augment` function augments objects. However if you pass it a function as the first parameter instead then it augments the `prototype` of the function. It's equivalent to:
+
+```javascript
+var augment = require("augment");
+
+var Rectangle = augment(Object.prototype, function () {
+    this.constructor = function (width, height) {
+        this.height = height;
+        this.width = width;
+    };
+
+    this.area = function () {
+        return this.width * this.height;
+    };
+});
+```
+
+The `augment` function is also available as a method on `Object.prototype` and `Function.prototype` allowing you to alternatively write the above code as follows:
+
+```javascript
+var augment = require("augment");
+
 var Rectangle = Object.augment(function () {
     this.constructor = function (width, height) {
         this.height = height;
@@ -156,6 +192,8 @@ deferredAlert("This will be displayed later.");
 alert("This will be displayed first.");
 ```
 
+The `bindable` function is equivalent to `bind.bind` (i.e. it takes a function `foo` and returns another function equivalent to `foo.bind`, or to put it simply `bindable(foo) === foo.bind`). Hence `bindable(bind)` is equivalent to `bind.bind` or `bindable` itself. In fact `bindable` is itself is implemented as `bind.bind(bind)`. Confusing? I think not.
+
 As a thumb rule the name of the bindable version of a function should be an adjective with the suffix _"able"_. For example a bindable `bind` would be `bindable` itself (which is what it actually is). A bindable `call` would be `callable`. A bindable `apply` would be `appliable`. You get my drift. Concise and descriptive names are very helpful.
 
 ### Function.callable ###
@@ -177,6 +215,10 @@ The `Array.from` function allows you to slice an array from a start index to an 
 ```javascript
 var primes = [2, 3, 5, 7];
 var oddPrimes = tail(primes); // [3, 5, 7]
+
+function tail(list) {
+    return arrayFrom(list, 1);
+}
 ```
 
 ### Object.ownPropertyOf ###
