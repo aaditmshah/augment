@@ -24,6 +24,14 @@ Similarly you can install `augment` for web apps using the following [component]
 component install javascript/augment
 ```
 
+You may use `augment` with the [Asynchronous Module Definition (AMD) API](https://github.com/amdjs/amdjs-api "Asynchronous Module Definition (AMD) API") as follows:
+
+```javascript
+define(["augment"], function (augment) {
+    // Note that you may also use `require` instead of `define`.
+});
+```
+
 You can easily include it in [fiddles](http://jsfiddle.net/ "Create a new Fiddle - jsFiddle") and [benchmarks](http://jsperf.com/ "jsPerf: JavaScript performance playground") using the following HTML code:
 
 ```html
