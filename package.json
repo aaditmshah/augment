@@ -1,24 +1,19 @@
 {
     "name": "augment",
     "description": "The world's smallest and fastest classical JavaScript inheritance pattern.",
-    "version": "3.3.5",
+    "version": "4.0.0",
     "keywords": ["augment", "augments", "augmentation", "extend", "extends", "extension", "prototype", "prototypal", "class", "classical", "object", "inheritance", "uber", "super", "constructor", "oop"],
-    "author": "Aadit M Shah (http://aaditmshah.github.com/) <aaditmshah@myopera.com>",
-    "main": "lib/augment.js",
+    "author": "Aadit M Shah (http://aaditmshah.github.io/) <aaditmshah@myopera.com>",
+    "main": "augment.js",
     "maintainers": [{
         "name": "Aadit M Shah",
         "email": "aaditmshah@myopera.com",
-        "web": "http://aaditmshah.github.com/"
+        "web": "http://aaditmshah.github.io/"
     }],
     "contributors": [{
         "name": "Aadit M Shah",
         "email": "aaditmshah@myopera.com",
-        "web": "http://aaditmshah.github.com/"
-    },
-    {
-        "name": "Giovanni Funchal",
-        "email": "gafunchal@gmail.com",
-        "web": "http://funchal.github.com/"
+        "web": "http://aaditmshah.github.io/"
     }],
     "bugs": "https://github.com/javascript/augment/issues",
     "licenses": [{
@@ -30,5 +25,5 @@
         "url": "https://github.com/javascript/augment.git"
     }],
     "dependencies": {},
-    "homepage": "http://javascript.github.com/augment"
+    "homepage": "https://github.com/javascript/augment"
 }
