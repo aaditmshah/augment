@@ -1,0 +1,12 @@
+{
+  "name": "augment",
+  "main": "augment.js",
+  "version": "4.0.0",
+  "homepage": "https://github.com/javascript/augment",
+  "authors": [
+    "Aadit M Shah (http://aaditmshah.github.io/) <aaditmshah@myopera.com>"
+  ],
+  "description": "The world's smallest and fastest classical JavaScript inheritance pattern.",
+  "keywords": ["augment", "augments", "augmentation", "extend", "extends", "extension", "prototype", "prototypal", "class", "classical", "object", "inheritance", "uber", "super", "constructor", "oop"],
+  "license": "MIT"
+}

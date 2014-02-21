@@ -8,7 +8,8 @@ Inspired by giants like [Jeremy Ashkenas](http://ashkenas.com/ "Jeremy/Ashkenas 
 
 1. You can install `augment` on [node.js](http://nodejs.org/ "node.js") using the [npm](https://npmjs.org/ "npm") command `npm install augment`.
 2. You can install `augment` on [RingoJS](http://ringojs.org/ "Home - RingoJS") using the [rp](https://github.com/grob/rp "grob/rp") command `rp install augment`.
-3. You can install `augment` for web apps using the [component](https://github.com/component/component) command `component install javascript/augment`.
+3. You can install `augment` for web apps using the [component](https://github.com/component/component "component/component") command `component install javascript/augment`.
+4. You can install `augment` for web apps using the [bower](http://bower.io/ "Bower - A package manager for the web") command `bower install augment`.
 
 ## Usage ##
 
