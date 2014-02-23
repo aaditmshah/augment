@@ -9,9 +9,12 @@
     var slice = Array.prototype.slice;
 
     return function (base, body) {
-        var uber = Factory.prototype = typeof base === "function" ? base.prototype : base;
-        var prototype = new Factory;
-        body.apply(prototype, slice.call(arguments, 2).concat(uber));
+        var 
+        uber = Factory.prototype = typeof base === "function" ? base.prototype : base,
+        prototype = new Factory,
+        args = slice.call(arguments, 2);
+        args.unshift(uber);
+        body.apply(prototype, args);
         if (!prototype.hasOwnProperty("constructor")) return prototype;
         var constructor = prototype.constructor;
         constructor.prototype = prototype;
