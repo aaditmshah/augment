@@ -1,7 +1,7 @@
 {
   "name": "augment",
   "main": "augment.js",
-  "version": "4.0.0",
+  "version": "4.0.0+docs-1",
   "homepage": "https://github.com/javascript/augment",
   "authors": [
     "Aadit M Shah (http://aaditmshah.github.io/) <aaditmshah@myopera.com>"
