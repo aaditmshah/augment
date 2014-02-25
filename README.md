@@ -38,6 +38,7 @@ Inspired by giants like [Jeremy Ashkenas](http://ashkenas.com/ "Jeremy/Ashkenas 
 ## Man Pages ##
 
 1. [Getting Started](https://github.com/javascript/augment/wiki/Getting-Started "Getting Started · javascript/augment Wiki")
+2. [Classical Inheritance](https://github.com/javascript/augment/wiki/Classical-Inheritance "Classical Inheritance · javascript/augment Wiki")
 
 ## License ##
 
