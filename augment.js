@@ -10,8 +10,8 @@
 
     var augment = function (base, body) {
         var uber = Factory.prototype = typeof base === "function" ? base.prototype : base;
-        var prototype = new Factory;
-        body.apply(prototype, slice.call(arguments, 2).concat(uber));
+        var prototype = new Factory, properties = body.apply(prototype, slice.call(arguments, 2).concat(uber));
+        if (typeof properties === "object") for (var key in properties) prototype[key] = properties[key];
         if (!prototype.hasOwnProperty("constructor")) return prototype;
         var constructor = prototype.constructor;
         constructor.prototype = prototype;
@@ -26,8 +26,8 @@
 
     augment.extend = function (base, body) {
         return augment(base, function (uber) {
-            for (var key in body) this[key] = body[key];
             this.uber = uber;
+            return body;
         });
     };
 
