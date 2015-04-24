@@ -20,10 +20,10 @@
         "type": "MIT",
         "url": "http://opensource.org/licenses/MIT"
     }],
-    "repositories": [{
+    "repository": {
         "type": "git",
         "url": "https://github.com/javascript/augment.git"
-    }],
+    },
     "dependencies": {},
     "homepage": "https://github.com/javascript/augment"
 }
