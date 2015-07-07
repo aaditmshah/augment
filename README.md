@@ -35,7 +35,7 @@ Inspired by giants like [Jeremy Ashkenas](http://ashkenas.com/ "Jeremy/Ashkenas 
 
 4. You can browse the [source code](https://github.com/javascript/augment/blob/master/augment.js "javascript/augment") and stick it into your program.
 
-## Man Pages ##
+## Manual Pages ##
 
 1. [Getting Started](https://github.com/javascript/augment/wiki/Getting-Started "Getting Started · javascript/augment Wiki")
 2. [Classical Inheritance](https://github.com/javascript/augment/wiki/Classical-Inheritance "Classical Inheritance · javascript/augment Wiki")
