@@ -1,6 +1,6 @@
 # augment #
 
-The world's smallest and fastest classical JavaScript inheritance pattern, `augment`, is a [seven line function](https://github.com/javascript/augment/blob/master/augment.js#L12-L18 "augment.js") which allows you to write [CoffeeScript style classes](http://coffeescript.org/#classes "CoffeeScript") with a flair of [simplicity](http://ejohn.org/blog/simple-javascript-inheritance/ "John Resig -   Simple JavaScript Inheritance"); and it still [beats the bejesus](http://jsperf.com/oop-benchmark/158 "JavaScript Object Oriented Libraries Benchmark · jsPerf") out of other JavaScript inheritance libraries.
+The world's smallest and fastest classical JavaScript inheritance pattern, `augment`, is a [seven line function](https://github.com/aaditmshah/augment/blob/master/augment.js#L12-L18 "augment.js") which allows you to write [CoffeeScript style classes](http://coffeescript.org/#classes "CoffeeScript") with a flair of [simplicity](http://ejohn.org/blog/simple-javascript-inheritance/ "John Resig -   Simple JavaScript Inheritance"); and it still [beats the bejesus](http://jsperf.com/oop-benchmark/158 "JavaScript Object Oriented Libraries Benchmark · jsPerf") out of other JavaScript inheritance libraries.
 
 Inspired by giants like [Jeremy Ashkenas](http://ashkenas.com/ "Jeremy/Ashkenas — Portfolio") and [John Resig](http://ejohn.org/ "John Resig - JavaScript Programmer"), `augment` is an augmentation of ideas. Classes created using `augment` have a CoffeeScript-like class structure, and a syntax like John Resig's classes; but they are more readable, intuitive and orders of magnitude faster. In addition they work on virtually every JavaScript platform.
 
@@ -33,13 +33,13 @@ Inspired by giants like [Jeremy Ashkenas](http://ashkenas.com/ "Jeremy/Ashkenas 
     <script src="https://rawgithub.com/javascript/augment/master/augment.js"></script>
     ```
 
-4. You can browse the [source code](https://github.com/javascript/augment/blob/master/augment.js "javascript/augment") and stick it into your program.
+4. You can browse the [source code](https://github.com/aaditmshah/augment/blob/master/augment.js "javascript/augment") and stick it into your program.
 
 ## Manual Pages ##
 
-1. [Getting Started](https://github.com/javascript/augment/wiki/Getting-Started "Getting Started · javascript/augment Wiki")
-2. [Classical Inheritance](https://github.com/javascript/augment/wiki/Classical-Inheritance "Classical Inheritance · javascript/augment Wiki")
-3. [Prototypal Inheritance](https://github.com/javascript/augment/wiki/Prototypal-Inheritance "Prototypal Inheritance · javascript/augment Wiki")
+1. [Getting Started](https://github.com/aaditmshah/augment/wiki/Getting-Started "Getting Started · javascript/augment Wiki")
+2. [Classical Inheritance](https://github.com/aaditmshah/augment/wiki/Classical-Inheritance "Classical Inheritance · javascript/augment Wiki")
+3. [Prototypal Inheritance](https://github.com/aaditmshah/augment/wiki/Prototypal-Inheritance "Prototypal Inheritance · javascript/augment Wiki")
 
 ## License ##
 
